@@ -25,6 +25,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Desktop", "Desktop", "{6AB2
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebSites", "WebSites", "{0433BBFF-17FD-41B4-9C03-24091931B13E}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{0D7C5AA0-9E68-441C-B4E3-6231527FF07D}"
+	ProjectSection(SolutionItems) = preProject
+		Scripts\InsecureSite - db.sql = Scripts\InsecureSite - db.sql
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
