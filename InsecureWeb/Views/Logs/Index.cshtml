@@ -1,0 +1,36 @@
+﻿@model IList<InsecureWeb.Models.LogModel>
+
+@{
+	ViewBag.Title = "Log";
+}
+
+<h2>@ViewBag.Title.</h2>
+
+<table class="table">
+	<thead>
+		<tr>
+			<th>
+				UserAgent
+			</th>
+			<th>
+				Url
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+		@if (Model != null)
+		{
+			foreach (var item in Model)
+			{
+				<tr>
+					<td>
+						@Html.DisplayFor(modelItem => item.UserAgent)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.UrlRequest)
+					</td>
+				</tr>
+			}
+		}
+	</tbody>
+</table>

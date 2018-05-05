@@ -1,0 +1,174 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Comentarios</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+		  integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+</head>
+<body>
+	<div class="container">
+		<br />
+		<br />
+		<br />
+		<h2 style="color:red">Comentarios -> Pero no es la Web real</h2>
+
+		<table class="table">
+			<thead>
+				<tr>
+					<th style="width:20%">
+						Asunto
+					</th>
+					<th>
+						Comentario
+					</th>
+					<th style="width:20%">Ver</th>
+					<th style="width:20%"></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>
+						P&#225;gina maliciosa
+					</td>
+					<td>
+						Url con una p&#225;gina maliciosa
+					</td>
+					<td>
+						<a href="http://localhost:55140/TabNapping/Malicious/MaliciousSetContent.htm" target="_blank">Ver página</a>
+					</td>
+					<td>
+						<a class="btn btn-primary" href="/Comments/Edit/13">Editar</a>
+						<a class="btn btn-primary" href="/Comments/Delete/13">Borrar</a>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						Url maliciosa en otro dominio
+					</td>
+					<td>
+						Prueba con una url de otro dominio
+					</td>
+					<td>
+						<a href="https://mathiasbynens.be/demo/opener" target="_blank">Ver página</a>
+					</td>
+					<td>
+						<a class="btn btn-primary" href="/Comments/Edit/14">Editar</a>
+						<a class="btn btn-primary" href="/Comments/Delete/14">Borrar</a>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						Url maliciosa fin sesi&#243;n
+					</td>
+					<td>
+						Una p&#225;gina maliciosa que indica que ha habido un fin de sesi&#243;n
+					</td>
+					<td>
+						<a href="http://localhost:55140/TabNapping/Malicious/MaliciousEndSession.htm" target="_blank">Ver página</a>
+					</td>
+					<td>
+						<a class="btn btn-primary" href="/Comments/Edit/15">Editar</a>
+						<a class="btn btn-primary" href="/Comments/Delete/15">Borrar</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<div class="row  justify-content-end">
+			<div class=".col-md-3 .offset-md-3">
+				<a class="btn btn-primary" href="/Comments/Edit">Nuevo comentario</a>
+			</div>
+		</div>
+
+		<br />
+		<br />
+		<hr />
+		<br />
+		<br />
+
+		<h1>No sé, me parece que algo ha cambiado...</h1>
+
+		<p>
+			Cuando abrimos una página con <code>target = "_blank"</code>, la página destino tiene acceso a la propiedad <code>window.opener</code>
+			que nos permite cambiar el contenido de la página inicial.
+		</p>
+
+		<p>Por ejemplo, tenemos una lista de enlaces con <code>target = _blank</code>:</p>
+
+		<ul>
+			<li>
+				Al pulsar sobre este enlace se cambia el contenido de la página <a href="../Malicious/MaliciousSetContent.htm" target="_blank">
+					desde el mismo dominio
+				</a>
+			</li>
+			<li>
+				Al pulsar sobre este enlace se cambia el contenido de la página <a href="../Malicious/MaliciousSetContent.htm" target="_blank">
+					desde otro dominio
+				</a> (CORS no aplica)
+			</li>
+			<li>
+				Podríamos hacer algo un poco más <a href="../Malicious/MaliciousEndSession.htm" target="_blank">peligroso</a>
+			</li>
+		</ul>
+
+		<p>Al pulsar cualquiera de ellos (independientemente de si está o no en el mismo dominio) veremos como esta página inicial cambia.</p>
+
+		<hr />
+
+		<h1>La solución</h1>
+
+		<p>
+			Bastante sencilla, basta con eliminar el acceso a <code>window.opener</code>, bien añadiendo a nuestro vínculo el atributo
+			<code>rel = noopener</code> o <code>rel = noreferrer</code> (dependiendo del navegador)
+			o bien eliminando la referencia a <code>window.opener</code> con JavaScript:
+		</p>
+
+		<pre>
+		<code>
+                var newWindow = window.open();
+
+                    newWindow.opener = null;
+                    newWindow.location = url;
+            </code>
+        </pre>
+		<ul>
+			<li>
+				El  <a href="../Malicious/MaliciousSetContent.htm" rel="noopener" target="_blank">mismo enlace de antes</a> pero esta vez sin peligro
+				porque utilizamos <code>rel=noopener</code> .
+			</li>
+			<li>
+				El  <a href="../Malicious/MaliciousSetContent.htm" rel="noreferrer" target="_blank">mismo enlace de antes</a> pero esta vez sin peligro
+				porque utilizamos <code>rel=noreferrer</code> .
+			</li>
+			<li>
+				Y esta vez con
+				<a class="user-generated" href="../Malicious/MaliciousSetContent.htm" target="_blank"
+				   onclick="var newWindow = window.open(); newWindow.opener = null; newWindow.location = href; return false;">JavaScript</a>
+			</li>
+		</ul>
+
+		<p>Hay que tener en cuenta que no todas las opciones funcionan en todos los navegadores. </p>
+
+		<br />
+
+		<p><b>Fuente:</b> <a href='https://mathiasbynens.github.io/rel-noopener/'>MathiasBynens</a></p>
+
+
+		<hr />
+		<footer>
+			<p>&copy; 2018 - Ejemplo de web insegura afectada por TabNapping</p>
+		</footer>
+	</div>
+
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+			integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+			integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+			integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>

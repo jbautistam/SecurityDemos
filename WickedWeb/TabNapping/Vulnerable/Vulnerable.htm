@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Página vulnerable a tabnapping</title>
+        <meta charset="utf-8">
+        <style>
+                html { font: 1em/1.6 sans-serif; }
+                body { padding: 0 .75em; max-width: 70em; margin: 0 auto; }
+            </style>
+    </head>
+    <body>
+        <h1>El problema</h1>
+
+        <p>Cuando abrimos una página con <code>target = "_blank"</code>, la página destino tiene acceso a la propiedad <code>window.opener</code>
+            que nos permite cambiar el contenido de la página inicial.</p>
+
+        <p>Por ejemplo, tenemos una lista de enlaces con <code>target = _blank</code>:</p>
+        
+        <ul>
+            <li>
+                Al pulsar sobre este enlace se cambia el contenido de la página <a href="../Malicious/MaliciousSetContent.htm" target="_blank">
+                     desde el mismo dominio
+                </a>
+            </li>
+            <li>
+                    Al pulsar sobre este enlace se cambia el contenido de la página <a href="https://mathiasbynens.be/demo/opener" target="_blank">
+                         desde otro dominio (CORS no aplica)
+                    </a> (la web destino es el artículo original).
+            </li>
+            <li>
+                    Podríamos hacer algo un poco más <a href="../Malicious/MaliciousEndSession.htm" target="_blank">peligroso</a>
+            </li>
+        </ul>
+
+        <p>Al pulsar cualquiera de ellos (independientemente de si está o no en el mismo dominio) veremos como esta página inicial cambia.</p>
+
+        <hr/>
+
+        <h1>La solución</h1>
+
+        <p>Bastante sencilla, basta con eliminar el acceso a <code>window.opener</code>, bien añadiendo a nuestro vínculo el atributo 
+            <code>rel = noopener</code> o code>rel = noreferrer</code> (dependiendo del navegador)
+            o bien eliminando la referencia a <code>window.opener</code> con JavaScript:</p>
+
+        <pre>
+            <code>
+                var newWindow = window.open();
+
+                    newWindow.opener = null;
+                    newWindow.location = url;
+            </code>
+        </pre>
+        <ul>
+            <li>
+                El  <a href="../Malicious/MaliciousSetContent.htm" rel="noopener" target="_blank">mismo enlace de antes</a> pero esta vez sin peligro
+                porque utilizamos <code>rel=noopener</code> .
+            </li>
+            <li>
+                    El  <a href="../Malicious/MaliciousSetContent.htm" rel="noreferrer" target="_blank">mismo enlace de antes</a> pero esta vez sin peligro
+                    porque utilizamos <code>rel=noreferrer</code> .
+            </li>
+            <li>
+                    Y esta vez con 
+                    <a class="user-generated" href="../Malicious/MaliciousSetContent.htm" target="_blank"
+                        onclick="var newWindow = window.open(); newWindow.opener = null; newWindow.location = href; return false;">JavaScript</a>
+            </li>
+        </ul>
+
+        <p>Hay que tener en cuenta que no todas las opciones funcionan en todos los navegadores. </p>
+
+        <br/>
+
+        <p><b>Fuente:</b> <a href='https://mathiasbynens.github.io/rel-noopener/'>MathiasBynens</a></p>
+    </body>
+</html>

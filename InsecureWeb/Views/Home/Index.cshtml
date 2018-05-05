@@ -1,0 +1,36 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>Insecure Web</h1>
+    <p class="lead">Ejemplo de Web insegura</p>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>Login</h2>
+		<p>
+			@Html.ActionLink("Login", "Index", "Login", new { area = "" }, new { @class = "btn btn-primary" })
+		</p>
+    </div>
+	<div class="col-md-4">
+		<h2>Comentarios</h2>
+		<p></p>
+		<p>
+			@Html.ActionLink("Comentarios (I)", "Index", "Comments", new { area = "" }, new { @class = "btn btn-primary" })
+		</p>
+
+		<p>
+			@Html.ActionLink("Comentarios (II)", "IndexNoTabnapping", "Comments", new { area = "" }, new { @class = "btn btn-primary" })
+		</p>
+
+	</div>
+	<div class="col-md-4">
+		<h2>Logs</h2>
+		<p></p>
+		<p>
+			@Html.ActionLink("Log", "Index", "Logs", new { area = "" }, new { @class = "btn btn-primary" })
+		</p>
+	</div>
+</div>

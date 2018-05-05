@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>Bau.Libraries.LibMarkupLanguage</RootNamespace>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DebugType>none</DebugType>
+    <DebugSymbols>false</DebugSymbols>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Services\JSON\**" />
+    <Compile Remove="Services\Tools\**" />
+    <EmbeddedResource Remove="Services\JSON\**" />
+    <EmbeddedResource Remove="Services\Tools\**" />
+    <None Remove="Services\JSON\**" />
+    <None Remove="Services\Tools\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Services\XML\ve-3844.tmp" />
+  </ItemGroup>
+
+</Project>

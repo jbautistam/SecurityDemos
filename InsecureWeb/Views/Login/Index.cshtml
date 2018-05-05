@@ -1,0 +1,37 @@
+﻿@model InsecureWeb.Models.UserModel
+
+@{
+	ViewBag.Title = "Login";
+}
+
+@using (Html.BeginForm("Login", "Login", FormMethod.Post))
+{
+	<fieldset>
+		<legend>Inicio de sesión</legend>
+
+		<table style="width:100%">
+			<tr>
+				<td style="width:10%">Usuario:</td>
+				<td style="width:90%">@Html.TextBoxFor(a => a.UserName)</td>
+			</tr>
+			<tr>
+				<td>Contraseña:</td>
+				<td>@Html.TextBoxFor(a => a.Password)</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td>
+					<input type="submit" value="Login" />
+				</td>
+				<td></td>
+			</tr>
+		</table>
+
+		@if (!string.IsNullOrEmpty(@ViewBag.Message))
+		{
+			<div style="border: 1px solid red;margin:2em;padding:3px;">
+				@ViewBag.Message
+			</div>
+		}
+	</fieldset>
+}  

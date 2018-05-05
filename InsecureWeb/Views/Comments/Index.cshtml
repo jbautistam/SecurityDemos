@@ -1,0 +1,53 @@
+﻿@model IList<InsecureWeb.Models.CommentModel>
+
+@{
+	ViewBag.Title = "Comentarios";
+}
+
+<h2>@ViewBag.Title.</h2>
+
+<table class="table">
+	<thead>
+		<tr>
+			<th style="width:20%">
+				Asunto
+			</th>
+			<th>
+				Comentario
+			</th>
+			<th style="width:20%">Ver</th>
+			<th style="width:20%"></th>
+		</tr>
+	</thead>
+	<tbody>
+		@if (Model != null)
+		{
+			foreach (var item in Model)
+			{
+				<tr>
+					<td>
+						@Html.Raw(item.Subject)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.Body)
+					</td>
+					<td>
+						<a href="@item.Url" target="_blank">Ver página</a>
+					</td>
+					<td>
+						@Html.ActionLink("Editar", "Edit", "Comments",
+											  new { id = item.CommentId }, new { @class = "btn btn-primary" })
+						@Html.ActionLink("Borrar", "Delete", "Comments",
+											  new { id = item.CommentId }, new { @class = "btn btn-primary" })
+					</td>
+				</tr>
+			}
+		}
+	</tbody>
+</table>
+
+<div class="row  justify-content-end">
+	<div class=".col-md-3 .offset-md-3">
+		@Html.ActionLink("Nuevo comentario", "Edit", "Comments", new { area = "" }, new { @class = "btn btn-primary" })
+	</div>
+</div>
